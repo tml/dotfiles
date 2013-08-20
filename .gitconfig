@@ -1,0 +1,55 @@
+[push]
+	default = simple
+[user]
+	name = Joey Smith
+	email = jsmith@axis41.com
+[core]
+	autocrlf = input
+[alias]
+    co = checkout
+    ci = commit -a
+    br = branch
+    me = merge --no-ff
+    undo = reset --hard ORIG_HEAD
+    st = status
+    up = pull --rebase
+    unstage = reset HEAD --
+    lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+    gl = "log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'"
+    puff = pull --ff-only
+    crxclone = "!([ $# = 1 ] && (CODIR=`echo $1 | sed -e 's@.*/@@g'`; echo $CODIR; git clone $1 $CODIR; cd $CODIR && git update-index --assume-unchanged crx.properties; echo >/dev/null)) || echo 'Cannot accept more than 1 argument to crxclone'"
+    assume   = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+    snapshot = !git stash save "snapshot: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" && git stash apply "stash@{0}"
+    ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+[apply]
+    whitespace = warn
+[github]
+    user = tml
+    token = 523f8fc95b8b7f6e8baf790dd8acd062
+[color]
+    diff = auto
+    status = auto
+
+[receive]
+    denyCurrentBranch = warn
+[core]
+    autocrlf = input
+	excludesfile = /Users/jsmith/.gitignore_global
+[branch]
+     autosetuprebase = always
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[gitflow]
+	showCommands = true
+[mergetool]
+	keepBackup = true
